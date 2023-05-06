@@ -8,7 +8,8 @@ import { ConfigModule } from '@nestjs/config'
     ConfigModule.forRoot(),
     SequelizeModule.forRoot({
       dialect: 'sqlite',
-      storage: process.env['DB_NAME']
+      storage: process.env['DB_NAME'],
+      autoLoadModels: true
     })
   ],
   controllers: [],
