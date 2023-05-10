@@ -2,8 +2,8 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common'
 import { AppService } from './app.service'
 import { SequelizeModule } from '@nestjs/sequelize'
 import { ConfigModule } from '@nestjs/config'
-import { AuthModule } from './auth/auth.module'
-import { AuthMiddleware } from 'auth/auth.middleware'
+import { AuthMiddleware, AuthModule } from 'auth'
+import { EventsModule } from './events'
 
 @Module({
   imports: [
@@ -13,7 +13,8 @@ import { AuthMiddleware } from 'auth/auth.middleware'
       storage: process.env['DB_NAME'],
       autoLoadModels: true
     }),
-    AuthModule
+    AuthModule,
+    EventsModule
   ],
   controllers: [],
   providers: [AppService]
