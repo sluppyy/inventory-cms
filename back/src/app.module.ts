@@ -3,7 +3,8 @@ import { AppService } from './app.service'
 import { SequelizeModule } from '@nestjs/sequelize'
 import { ConfigModule } from '@nestjs/config'
 import { AuthMiddleware, AuthModule } from 'auth'
-import { EventsModule } from './events'
+import { InventoryEventsModule } from 'inventory-events'
+import { EventEmitterModule } from '@nestjs/event-emitter'
 
 @Module({
   imports: [
@@ -13,8 +14,9 @@ import { EventsModule } from './events'
       storage: process.env['DB_NAME'],
       autoLoadModels: true
     }),
+    EventEmitterModule.forRoot(),
     AuthModule,
-    EventsModule
+    InventoryEventsModule
   ],
   controllers: [],
   providers: [AppService]

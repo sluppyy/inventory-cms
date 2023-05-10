@@ -3,10 +3,11 @@ import { AppModule } from './app.module'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const packageJson = require('../package.json')
-import { ConsoleLogger } from '@nestjs/common'
+import { ConsoleLogger, ValidationPipe } from '@nestjs/common'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
+  app.useGlobalPipes(new ValidationPipe())
   const appLogger = new ConsoleLogger('App')
 
   const cfg = new DocumentBuilder()
