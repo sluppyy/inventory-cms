@@ -43,7 +43,7 @@ export class SequelizeItemsRepo extends ItemsRepo {
 
 function map(db: DBItem): Item {
   return new Item(
-    db.id,
+    String(db.id),
     db.name,
     db.description,
     db.deleted,
