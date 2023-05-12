@@ -25,8 +25,8 @@ export class SequelizeItemsRepo extends ItemsRepo {
     return map(db)
   }
 
-  async findAll(): Promise<Item[]> {
-    return (await this._repo.findAll()).map(map)
+  async findAll(filter = {}): Promise<Item[]> {
+    return (await this._repo.findAll({ where: filter })).map(map)
   }
 
   async update(data: Partial<Item> & { id: string }): Promise<Item | null> {
