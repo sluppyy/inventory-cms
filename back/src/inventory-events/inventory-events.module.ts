@@ -15,7 +15,6 @@ import { InventoryEventsController } from './inventory-events.controller'
       useClass: SequelizeInventoryEventsRepo
     }
   ],
-  controllers: [InventoryEventsController],
-  exports: [InventoryEventsController]
+  controllers: [InventoryEventsController]
 })
 export class InventoryEventsModule {}

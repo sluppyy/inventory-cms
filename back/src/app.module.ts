@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config'
 import { AuthMiddleware, AuthModule } from 'auth'
 import { InventoryEventsModule } from 'inventory-events'
 import { EventEmitterModule } from '@nestjs/event-emitter'
+import { ItemsModule } from 'items'
 
 @Module({
   imports: [
@@ -17,7 +18,8 @@ import { EventEmitterModule } from '@nestjs/event-emitter'
     }),
     EventEmitterModule.forRoot(),
     AuthModule,
-    InventoryEventsModule
+    InventoryEventsModule,
+    ItemsModule
   ],
   controllers: [],
   providers: [AppService]
