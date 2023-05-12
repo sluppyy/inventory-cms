@@ -4,7 +4,7 @@ import { InventoryEventsRepo } from './inventory-events.repo'
 import { SequelizeInventoryEventsRepo } from './inventory-events.sequelizeRepo'
 import { SequelizeModule } from '@nestjs/sequelize'
 import { ItemsDeleted, ItemsGiven } from './inventory-events.sequelizeModels'
-import { InventoryEventsController } from './inventory-events.controller';
+import { InventoryEventsController } from './inventory-events.controller'
 
 @Module({
   imports: [SequelizeModule.forFeature([ItemsGiven, ItemsDeleted])],
@@ -15,6 +15,7 @@ import { InventoryEventsController } from './inventory-events.controller';
       useClass: SequelizeInventoryEventsRepo
     }
   ],
-  controllers: [InventoryEventsController]
+  controllers: [InventoryEventsController],
+  exports: [InventoryEventsController]
 })
 export class InventoryEventsModule {}

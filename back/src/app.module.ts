@@ -12,7 +12,8 @@ import { EventEmitterModule } from '@nestjs/event-emitter'
     SequelizeModule.forRoot({
       dialect: 'sqlite',
       storage: process.env['DB_NAME'],
-      autoLoadModels: true
+      autoLoadModels: true,
+      logging: false
     }),
     EventEmitterModule.forRoot(),
     AuthModule,
