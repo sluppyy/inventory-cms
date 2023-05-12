@@ -1,7 +1,15 @@
+import { Route, Routes } from "react-router-dom"
+import Pages from "./Pages"
+import AppSidebar from "./components/AppSidebar"
+
 function App() {
   return (
     <div className="App">
-      App
+      <AppSidebar />
+      <Routes>
+        <Route path="/" element={<Pages.Main />}/>
+        <Route path="/auth" element={<Pages.Auth />}/>
+      </Routes>
     </div>
   )
 }
