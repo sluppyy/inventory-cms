@@ -5,9 +5,10 @@ import { SequelizeModule } from '@nestjs/sequelize'
 import { Item } from './items.sequelizeModels'
 import { ItemsRepo } from './items.repo'
 import { SequelizeItemsRepo } from './items.sequelizeRepo'
+import { AuthModule } from 'auth'
 
 @Module({
-  imports: [SequelizeModule.forFeature([Item])],
+  imports: [SequelizeModule.forFeature([Item]), AuthModule],
   controllers: [ItemsController],
   providers: [
     ItemsService,

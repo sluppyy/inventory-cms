@@ -14,6 +14,7 @@ async function bootstrap() {
     .setTitle('Inventory CMS')
     .setDescription('Cms to manage inventories and trades')
     .setVersion(packageJson.version ?? '0')
+    .addBearerAuth()
     .build()
   const document = SwaggerModule.createDocument(app, cfg)
   SwaggerModule.setup('swagger', app, document)
