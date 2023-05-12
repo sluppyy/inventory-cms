@@ -11,16 +11,23 @@ export default function AppSidebar() {
   return (
     <div
       className="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark"
-      // style={{width: 280}}
     >
-    <span className="fs-4">Inventory CMS</span>
+    <span className="fs-4">
+      Inventory CMS
+    </span>
     
     <hr />
     
     <ul className="nav nav-pills flex-column mb-auto">
       {items.map(_ => 
-        <li className={pathname == _.to ? 'nav-item' : ''} key={_.to}>
-          <Link to={_.to} className={`nav-link text-white ${pathname == _.to ? 'active' : ''}`}>{_.title}</Link>
+        <li
+          className={pathname == _.to ? 'nav-item' : ''} 
+          key={_.to}>
+          <Link
+            to={_.to} 
+            className={`nav-link text-white ${pathname == _.to ? 'active' : ''}`}>
+            {_.title}
+          </Link>
         </li>
       )}
     </ul>
