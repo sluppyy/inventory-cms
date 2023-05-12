@@ -5,9 +5,17 @@ import { SequelizeModule } from '@nestjs/sequelize'
 import { UserItems } from './inventory.sequelizeModels'
 import { InventoryRepo } from './inventory.repo'
 import { SequelizeInventoryRepo } from './inventory.sequelizeRepo'
+import { InventoryEventsModule } from 'inventory-events'
+import { AuthModule } from 'auth'
+import { ItemsModule } from 'items'
 
 @Module({
-  imports: [SequelizeModule.forFeature([UserItems])],
+  imports: [
+    SequelizeModule.forFeature([UserItems]),
+    InventoryEventsModule,
+    AuthModule,
+    ItemsModule
+  ],
   controllers: [InventoryController],
   providers: [
     InventoryService,

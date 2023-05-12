@@ -16,6 +16,7 @@ import { AuthModule } from 'auth'
       provide: ItemsRepo,
       useClass: SequelizeItemsRepo
     }
-  ]
+  ],
+  exports: [ItemsService]
 })
 export class ItemsModule {}

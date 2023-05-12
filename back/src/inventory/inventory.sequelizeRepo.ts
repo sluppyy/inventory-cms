@@ -48,7 +48,10 @@ export class SequelizeInventoryRepo extends InventoryRepo {
     const cur = await this._repo.findOne({ where: mapFilter(filter) })
     if (!cur) return null
     const mapped = f(map(cur))
-    await cur.update(mapped)
+
+    for (const key in mapped) {
+      cur[key] = mapped[key]
+    }
     await cur.save()
     return mapped
   }
@@ -66,7 +69,7 @@ function mapFilter(filter: Partial<UserItems>): Partial<DBUserItems> {
   const copy: any = { ...filter }
 
   if ('itemId' in filter) {
-    copy.itemId = Number(filter.userId)
+    copy.itemId = Number.parseInt(filter.itemId ?? 'NaN') || null
   }
 
   return copy

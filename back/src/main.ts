@@ -4,10 +4,13 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const packageJson = require('../package.json')
 import { ConsoleLogger, ValidationPipe } from '@nestjs/common'
+import { InventoryFilter } from 'inventory/inventory.filter'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
   app.useGlobalPipes(new ValidationPipe())
+  app.useGlobalFilters(new InventoryFilter())
+
   const appLogger = new ConsoleLogger('App')
 
   const cfg = new DocumentBuilder()
