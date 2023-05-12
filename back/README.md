@@ -38,3 +38,10 @@ $ yarn run test:e2e
 # test coverage
 $ yarn run test:cov
 ```
+
+## Admin
+
+```bash
+# generate admin token
+$ yarn gen:adminToken
+```
