@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { IsNumber, IsPositive, IsString, Min } from 'class-validator'
+import { IsNumber, IsString, Min } from 'class-validator'
 
-export class GiveItems {
+export class AddItems {
   @ApiProperty()
   @IsString()
   userId: string

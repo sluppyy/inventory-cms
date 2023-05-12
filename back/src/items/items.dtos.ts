@@ -33,7 +33,7 @@ export class UpdateItem {
 
   @ApiProperty()
   @IsString()
-  description: string
+  description?: string
 
   @ApiProperty()
   @IsOptional()

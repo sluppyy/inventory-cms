@@ -32,7 +32,7 @@ export class AuthService {
       const decoded = jwt.verify(token, this._adminSecret)
       return decoded?.admin === 1
     } catch (e) {
-      return null
+      return false
     }
   }
 }

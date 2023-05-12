@@ -4,11 +4,11 @@ export abstract class InventoryEvent {
 }
 
 export class ItemsGiven extends InventoryEvent {
-  itemId: number
+  itemId: string
   count: number
 }
 
 export class ItemsDeleted extends InventoryEvent {
-  itemId: number
+  itemId: string
   count: number
 }
