@@ -8,6 +8,7 @@ function App() {
       <AppSidebar />
       <Routes>
         <Route path="/" element={<Pages.Main />}/>
+        <Route path="/items" element={<Pages.Items />}/>
         <Route path="/auth" element={<Pages.Auth />}/>
       </Routes>
     </div>

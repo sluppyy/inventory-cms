@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 
 const items = [
   { to: '/', title: 'Home' },
+  { to: '/items', title: 'Items' },
   { to: '/auth', title: 'Auth' },
 ]
 
