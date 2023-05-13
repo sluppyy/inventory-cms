@@ -22,7 +22,7 @@ export const userItemsSlice = createSlice({
   extraReducers: ($) =>
     $.addCase(findUserItems.fulfilled, (state, res) => {
       state.items[res.payload.userId] = res.payload.items;
-    }),
+    }).addCase(giveItems.fulfilled, () => {}),
 });
 
 export const { CURRENT } = userItemsSlice.actions;
@@ -45,5 +45,27 @@ export const findUserItems = createAsyncThunk(
     }
 
     return { ...res, userId };
+  }
+);
+
+export const giveItems = createAsyncThunk(
+  "userItems/giveItems",
+  async (data: { userId: string; itemId: string; count: number }, thunkApi) => {
+    const res = await api.giveItems(data);
+
+    await thunkApi.dispatch(findUserItems(data.userId));
+
+    return { ...res, userId: data.userId };
+  }
+);
+
+export const deleteItems = createAsyncThunk(
+  "userItems/deleteItems",
+  async (data: { userId: string; itemId: string; count: number }, thunkApi) => {
+    const res = await api.deleteItems(data);
+
+    await thunkApi.dispatch(findUserItems(data.userId));
+
+    return { ...res, userId: data.userId };
   }
 );

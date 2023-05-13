@@ -12,7 +12,7 @@ export default function UserItems() {
   items?.forEach(item => map.set(item.id, item))
   
   return (
-    <table className="table table-striped align-middle table-hover">
+    <table className="table table-striped align-middle">
       <thead>
         <tr>
           <th scope="col">User id</th>
@@ -21,12 +21,10 @@ export default function UserItems() {
           <th scope="col">Count</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody style={{ cursor: 'pointer' }}>
         {userItems && userItems.map(item => (
           <tr
-            key={item.userId + item.itemId}
-            onClick={() => nav(`/items#item${item.itemId}`)}
-            >
+            key={item.userId + item.itemId}>
             <th scope="row">{item.userId}</th>
             <th>{item.itemId}</th>
             <th>{map.get(item.itemId)?.name}</th>

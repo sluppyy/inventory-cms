@@ -85,3 +85,39 @@ export async function getUserItems(
     return { code: "error" };
   }
 }
+
+export interface GiveItems {
+  userId: string;
+  itemId: string;
+  count: number;
+}
+export type GiveItemsResponse = { code: "ok" } | { code: "error" };
+export async function giveItems(data: GiveItems): Promise<GiveItemsResponse> {
+  try {
+    await axios.post("/inventory/give-items", data, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    });
+    return { code: "ok" };
+  } catch (error) {
+    return { code: "error" };
+  }
+}
+
+export interface DeleteItems {
+  userId: string;
+  itemId: string;
+  count: number;
+}
+export type DeleteItemsResponse = { code: "ok" } | { code: "error" };
+export async function deleteItems(
+  data: GiveItems
+): Promise<DeleteItemsResponse> {
+  try {
+    await axios.post("/inventory/delete-items", data, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    });
+    return { code: "ok" };
+  } catch (error) {
+    return { code: "error" };
+  }
+}
