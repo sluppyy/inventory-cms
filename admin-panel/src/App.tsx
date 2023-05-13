@@ -9,6 +9,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Pages.Main />}/>
         <Route path="/items" element={<Pages.Items />}/>
+        <Route path="/user-items" element={<Pages.UserItems />}/>
         <Route path="/auth" element={<Pages.Auth />}/>
       </Routes>
     </div>

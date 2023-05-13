@@ -18,7 +18,7 @@ export default function ItemsTable({ items }: Props) {
       </thead>
       <tbody>
         {items.map(item => (
-          <tr key={item.id}>
+          <tr key={item.id} id={`item${item.id}`}>
             <th scope="row">{item.id}</th>
             <th>{item.name}</th>
             <th>{item.description}</th>

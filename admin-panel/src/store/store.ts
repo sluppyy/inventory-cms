@@ -2,11 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { authSlice } from "./auth";
 import { itemsSlice } from "./items";
+import { userItemsSlice } from "./userItems";
 
 export const store = configureStore({
   reducer: {
     auth: authSlice.reducer,
     items: itemsSlice.reducer,
+    userItems: userItemsSlice.reducer,
   },
 });
 
@@ -20,4 +22,7 @@ export function useAuth() {
 }
 export function useItems() {
   return useAppSelector((state) => state.items);
+}
+export function useUserItems() {
+  return useAppSelector((state) => state.userItems);
 }

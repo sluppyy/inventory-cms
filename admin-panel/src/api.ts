@@ -61,3 +61,27 @@ export async function createItem({
     return { code: "error" };
   }
 }
+
+export type GetUserItemsResponse =
+  | {
+      code: "ok";
+      items: {
+        userId: string;
+        itemId: string;
+        count: number;
+      }[];
+    }
+  | { code: "error" };
+export async function getUserItems(
+  userId: string
+): Promise<GetUserItemsResponse> {
+  try {
+    const res = await axios.get(`inventory/${userId}`);
+    return {
+      code: "ok",
+      items: res.data,
+    };
+  } catch (error) {
+    return { code: "error" };
+  }
+}
