@@ -34,21 +34,41 @@ export const itemsSlice = createSlice({
 
 export const {} = itemsSlice.reducer;
 
-export const findAllItems = createAsyncThunk(
-  "items/findAllItems",
-  async (_, thunkApi) => {
-    const res = await api.findAllItems();
+export const findAllItems = createAsyncThunk("items/findAllItems", async () => {
+  const res = await api.findAllItems();
 
-    if (res.code != "ok") return res;
-    return {
-      code: "ok",
-      items: res.items.map((_) => ({
-        id: _.id,
-        name: _.name,
-        description: _.description,
-        imgUrl: _.imgUrl ?? undefined,
-        meta: _.meta ?? undefined,
-      })),
-    } as const;
+  if (res.code != "ok") return res;
+  return {
+    code: "ok",
+    items: res.items.map((_) => ({
+      id: _.id,
+      name: _.name,
+      description: _.description,
+      imgUrl: _.imgUrl ?? undefined,
+      meta: _.meta ?? undefined,
+    })),
+  } as const;
+});
+
+interface Create {
+  name: string;
+  description: string;
+  imgUrl?: string;
+  meta?: string;
+}
+
+export const createItem = createAsyncThunk(
+  "items/createItem",
+  async (dto: Create, thunkApi) => {
+    const res = await api.createItem({
+      ...dto,
+      token: localStorage.getItem("token") ?? "",
+    });
+
+    if (res.code === "ok") {
+      await thunkApi.dispatch(findAllItems());
+    }
+
+    return res;
   }
 );

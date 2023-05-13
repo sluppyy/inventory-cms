@@ -1,4 +1,7 @@
 import { useForm } from "react-hook-form"
+import { useAppDispatch } from "../../store";
+import { createItem } from "../../store/items";
+import { useState } from "react";
 
 interface Create {
   name: string,
@@ -8,10 +11,30 @@ interface Create {
 }
 
 export default function CreateItem() {
+  const dispatch = useAppDispatch()
   const { handleSubmit, register, formState: { errors } } = useForm<Create>()
+  const [createError, setCreateError] = useState<string | null>(null)
 
   function onSubmit(data: Create) {
-    console.log(data);
+    dispatch(createItem(data)).unwrap().then(res => {
+      switch (res.code) {
+        case 'ok':
+          setCreateError(null)
+          break;
+
+        case 'forbidden':
+          setCreateError('Forbidden. check your admin token')
+          break
+      
+        default:
+          setCreateError('Unknown error')
+          break;
+      }
+
+      setTimeout(() => {
+        setCreateError(null)
+      }, 3000)
+    })
   }
 
   return (
@@ -63,6 +86,11 @@ export default function CreateItem() {
       <button type="submit" className="btn btn-primary mt-3">
         Create
       </button>
+
+      {createError && <div 
+        className="alert alert-danger position-absolute bottom-0"
+        role="alert"
+        >{createError}</div>}
     </form>
   )
 }

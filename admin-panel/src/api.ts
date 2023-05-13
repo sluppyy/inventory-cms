@@ -1,4 +1,4 @@
-import _axios from "axios";
+import _axios, { AxiosError } from "axios";
 
 //import.meta.env.BASE_URL
 const baseURL = "http://localhost:3000/";
@@ -24,6 +24,40 @@ export async function findAllItems(): Promise<FindAllItemsResponse> {
       items: res.data,
     };
   } catch (e) {
+    return { code: "error" };
+  }
+}
+
+export interface CreateItem {
+  name: string;
+  description: string;
+  imgUrl?: string;
+  meta?: string;
+
+  token: string;
+}
+export type CreateItemResponse =
+  | {
+      code: "ok";
+    }
+  | {
+      code: "error" | "forbidden";
+    };
+export async function createItem({
+  token,
+  ...data
+}: CreateItem): Promise<CreateItemResponse> {
+  try {
+    await axios.post("/items", data, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return { code: "ok" };
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      if (error.response?.status === 403) {
+        return { code: "forbidden" };
+      }
+    }
     return { code: "error" };
   }
 }
