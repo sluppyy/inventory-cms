@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useAppDispatch, useItems } from "../store";
 import { findAllItems } from "../store/items";
 import ItemsTable from "../components/ItemsTable";
+import CreateItem from '../components/Forms/CreateItem'
 
 export default function Items() {
   const dispatch = useAppDispatch()
@@ -32,6 +33,7 @@ export default function Items() {
   return (
     <div>
       <ItemsTable items={items ?? []}/>
+      <CreateItem/>
     </div>
   )
 }
