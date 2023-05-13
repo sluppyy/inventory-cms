@@ -1,7 +1,6 @@
 import _axios, { AxiosError } from "axios";
 
-//import.meta.env.BASE_URL
-const baseURL = "http://localhost:3000/";
+const baseURL = import.meta.env.VITE_BASE_URL;
 const axios = _axios.create({ baseURL });
 
 export type FindAllItemsResponse =
