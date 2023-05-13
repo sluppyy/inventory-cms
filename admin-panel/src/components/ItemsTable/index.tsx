@@ -6,7 +6,7 @@ interface Props {
 
 export default function ItemsTable({ items }: Props) {
   return (
-    <table className="table table-striped">
+    <table className="table table-striped align-middle">
       <thead>
         <tr>
           <th scope="col">Id</th>
@@ -22,7 +22,7 @@ export default function ItemsTable({ items }: Props) {
             <th scope="row">{item.id}</th>
             <th>{item.name}</th>
             <th>{item.description}</th>
-            <th><img src={item.imgUrl} alt="img" /></th>
+            <th>{item.imgUrl && <img width={50} height={50} src={item.imgUrl} alt="img" />}</th>
             <th>{item.meta}</th>
           </tr>
         ))}
