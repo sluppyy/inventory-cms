@@ -121,3 +121,42 @@ export async function deleteItems(
     return { code: "error" };
   }
 }
+
+export interface UpdateItem {
+  id: string;
+  name?: string;
+  description?: string;
+  imgUrl?: string | null;
+  meta?: string | null;
+}
+export type UpdateItemResponse = { code: "ok" } | { code: "error" };
+export async function updateItem(
+  data: UpdateItem
+): Promise<UpdateItemResponse> {
+  try {
+    await axios.patch("/items", data, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    });
+    return { code: "ok" };
+  } catch (error) {
+    return { code: "error" };
+  }
+}
+
+export interface DeleteItem {
+  id: string;
+}
+export type DeleteItemResponse = { code: "ok" } | { code: "error" };
+export async function deleteItem(
+  data: DeleteItem
+): Promise<UpdateItemResponse> {
+  try {
+    await axios.delete("/items", {
+      data,
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    });
+    return { code: "ok" };
+  } catch (error) {
+    return { code: "error" };
+  }
+}

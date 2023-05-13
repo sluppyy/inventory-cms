@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom"
 import { Item as Model } from "../../models"
 
 interface Props {
@@ -5,8 +6,10 @@ interface Props {
 }
 
 export default function ItemsTable({ items }: Props) {
+  const nav = useNavigate()  
+
   return (
-    <table className="table table-striped align-middle">
+    <table className="table table-striped align-middle table-hover">
       <thead>
         <tr>
           <th scope="col">Id</th>
@@ -16,9 +19,12 @@ export default function ItemsTable({ items }: Props) {
           <th scope="col">Meta</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody style={{ cursor: 'pointer' }}>
         {items.map(item => (
-          <tr key={item.id} id={`item${item.id}`}>
+          <tr
+            key={item.id}
+            id={`item${item.id}`}
+            onClick={(e) => nav(`/edit-item/${item.id}`)}>
             <th scope="row">{item.id}</th>
             <th>{item.name}</th>
             <th>{item.description}</th>

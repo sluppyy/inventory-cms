@@ -29,7 +29,9 @@ export const itemsSlice = createSlice({
           state.items = null;
           state.status = "error";
         }
-      }),
+      })
+      .addCase(updateItem.fulfilled, () => {})
+      .addCase(deleteItem.fulfilled, () => {}),
 });
 
 export const {} = itemsSlice.reducer;
@@ -64,6 +66,42 @@ export const createItem = createAsyncThunk(
       ...dto,
       token: localStorage.getItem("token") ?? "",
     });
+
+    if (res.code === "ok") {
+      await thunkApi.dispatch(findAllItems());
+    }
+
+    return res;
+  }
+);
+
+export interface UpdateItem {
+  id: string;
+  name?: string;
+  description?: string;
+  imgUrl?: string | null;
+  meta?: string | null;
+}
+export const updateItem = createAsyncThunk(
+  "items/updateItem",
+  async (dto: UpdateItem, thunkApi) => {
+    const res = await api.updateItem(dto);
+
+    if (res.code === "ok") {
+      await thunkApi.dispatch(findAllItems());
+    }
+
+    return res;
+  }
+);
+
+export interface Delete {
+  id: string;
+}
+export const deleteItem = createAsyncThunk(
+  "items/deleteItem",
+  async (dto: Delete, thunkApi) => {
+    const res = await api.deleteItem(dto);
 
     if (res.code === "ok") {
       await thunkApi.dispatch(findAllItems());
