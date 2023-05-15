@@ -65,8 +65,13 @@ export type GetUserItemsResponse =
   | {
       code: "ok";
       items: {
-        userId: string;
-        itemId: string;
+        item: {
+          id: number;
+          name: string;
+          description: string;
+          imgUrl?: string;
+          meta?: string;
+        };
         count: number;
       }[];
     }

@@ -1,10 +1,10 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { UserItems } from "../models";
+import { Item, UserItems } from "../models";
 import * as api from "../api";
 
 const initialState: {
   items: {
-    [key: string]: UserItems[] | undefined;
+    [key: string]: { count: number; item: Item }[] | undefined;
   };
   current?: string;
 } = {
@@ -35,10 +35,12 @@ export const findUserItems = createAsyncThunk(
     if (res.code === "ok") {
       return {
         code: "ok",
-        items: res.items.map(({ count, itemId, userId }) => ({
+        items: res.items.map(({ count, item }) => ({
           count,
-          itemId,
-          userId,
+          item: {
+            ...item,
+            id: item.id.toString(),
+          },
         })),
         userId,
       };

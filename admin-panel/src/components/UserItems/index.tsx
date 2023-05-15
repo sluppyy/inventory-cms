@@ -15,20 +15,20 @@ export default function UserItems() {
     <table className="table table-striped align-middle">
       <thead>
         <tr>
-          <th scope="col">User id</th>
+        <th scope="col">Count</th>
           <th scope="col">Item id</th>
           <th scope="col">Item name</th>
-          <th scope="col">Count</th>
+          <th scope="col">Item img</th>
         </tr>
       </thead>
-      <tbody style={{ cursor: 'pointer' }}>
+      <tbody>
         {userItems && userItems.map(item => (
           <tr
-            key={item.userId + item.itemId}>
-            <th scope="row">{item.userId}</th>
-            <th>{item.itemId}</th>
-            <th>{map.get(item.itemId)?.name}</th>
-            <th>{item.count}</th>
+            key={item.item.id}>
+            <th scope="row">{item.count}</th>
+            <th>{item.item.id}</th>
+            <th>{item.item.name}</th>
+            <th><img src={item.item.imgUrl} width={50} height={50} /></th>
           </tr>
         ))}
       </tbody>
