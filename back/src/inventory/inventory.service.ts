@@ -30,7 +30,7 @@ export class InventoryService {
 
     let current = await this._repo.findUserItems(dto.userId, dto.itemId)
     if (!current) {
-      current = await this._repo.create(dto.userId, dto.itemId, dto.count)
+      current = await this._repo.create(dto.userId, dto.itemId, 0)
     }
     const items = await this._repo.update(
       { userId: dto.userId, itemId: dto.itemId },
